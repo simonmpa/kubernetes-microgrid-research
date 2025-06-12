@@ -72,7 +72,13 @@ The [azure worktrace](https://azurepublicdatasettraces.blob.core.windows.net/azu
 python datacleaning.py
 ```
 
+The worktrace is then ready to be run, which is done with the following command:
 
+**Important! This requires the microgrid simulation and flask api to be running**
+
+```bash
+python azureworktracerunner.py
+```
 
 ## Evaluation of results
 After you have run the simulation, you can inspect and evaluate the results the results stored in the `python-microgrid-simulation/logs` folder.
