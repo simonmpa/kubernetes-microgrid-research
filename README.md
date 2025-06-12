@@ -18,7 +18,7 @@ To replicate the experiments, you will need:
 
 ## Running the Microgrid Simulation
 
-Before getting started, create the database by running the following command:
+Before getting started, create the database by running the following command from the root directory:
 
 ```bash
 python python-microgrid-simulation/src/database.py
