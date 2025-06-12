@@ -1,0 +1,15 @@
+cvxpy==1.6.1
+Flask==3.1.1
+gym==0.26.2
+ipython==8.12.3
+matplotlib==3.10.3
+mosek==11.0.22
+numpy==2.3.0
+pandas==2.3.0
+plotly==6.0.0
+PyYAML==6.0.2
+PyYAML==6.0.2
+Requests==2.32.4
+scipy==1.15.3
+statsmodels==0.14.4
+tqdm==4.66.1
