@@ -12,6 +12,8 @@ To replicate the experiments, you will need:
   pip install -r python-microgrid-simulation/requirements.txt
   ```
 - The [Azure worktrace]() and place it in the `kubernetes-plugin/data` folder.
+- Install [Make](https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81.exe/) and add it to your path (depending on operating system).
+- Install [Docker](https://docs.docker.com/desktop/) and install for your given operating system.
 
 
 ## Running the Microgrid Simulation
@@ -22,13 +24,13 @@ Before getting started, create the database by running the following command:
 python python-microgrid-simulation/src/database.py
 ```
 
-To run the simulation, you will need two terminals. Open the first terminal in the *python-microgrid-simulation* directory and run the following command:
+To run the simulation, you will need two terminals. Open the first terminal in the root directory and run the following command:
 
 ```bash
 flask --app python-microgrid-simulation/src/api run
 ```
 
-Likewise, open the second terminal in the *python-microgrid-simulation* directory and run the following command:
+Likewise, open the second terminal in the root directory and run the following command:
 
 ```bash
 python python-microgrid-simulation/src/app.py
@@ -37,8 +39,8 @@ python python-microgrid-simulation/src/app.py
 ## Running the Kubernetes Plugin and Workload
 
 ### Running the Kubernetes Scheduler Simulator
-
-To run the Kubernetes Scheduler Simulator, go to ``kubernetes-plugin/kubernets-scheduler-simulator/`` and run the following command:
+First, ensure the Docker Engine is running.
+To run the Kubernetes Scheduler Simulator, go to ``kubernetes-plugin/kubernetes-scheduler-simulator/`` and run the following command:
 ```bash
 make docker_build_and_up
 ```
@@ -54,7 +56,7 @@ This applies the stages, that are used to decide how long a job runs.
 To enable the plugin, go to ``localhost:3000`` and click on the cogwheel icon on the top left.
 
 Add the plugin, which in this case is called ``NodeNumber``, and give it a desired weight. 
-![Tux, the Linux mascot](/images/plugin-weight.png)
+![Configuration](/images/plugin-weight.png)
 
 ### Running the worktrace
 

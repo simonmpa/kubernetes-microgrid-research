@@ -267,7 +267,7 @@ def export_gridnames_to_csv(gridnames: list[str]):
     """
     Export the grid names to a CSV file.
     """
-    filepath = "./data/gridnames.csv"
+    filepath = "./python-microgrid-simulation/data/gridnames.csv"
 
     if not os.path.exists(filepath):
         df = pd.DataFrame(gridnames, columns=["Gridname"])
@@ -311,13 +311,13 @@ def prune_and_forward_fill_solar_data(dataframe: pd.DataFrame):
 
     df_10min["Time"] = df_10min["Time"].dt.strftime("%d-%b-%Y %H:%M:%S")
 
-    df_10min.to_csv("data/solarPV_10min.csv", index=False)
+    df_10min.to_csv("python-microgrid-simulation/data/solarPV_10min.csv", index=False)
 
     return df_10min
 
 def main():
     # Load the solar data and setup variables for microgrid setup
-    df = pd.read_csv("data/solarPV.csv", dayfirst=True, parse_dates=["Time"])
+    df = pd.read_csv("./python-microgrid-simulation/data/solarPV.csv", dayfirst=True, parse_dates=["Time"])
     df_solar = prune_and_forward_fill_solar_data(df)
 
     column_names_aggregated = get_column_names(df_solar)
@@ -330,10 +330,10 @@ def main():
     grid_dict = grid_initial_load(column_names)
 
     # Test Co2 emission data
-    average_co2 = grid_co2_emission("data/emissions")
+    average_co2 = grid_co2_emission("./python-microgrid-simulation/data/emissions")
 
     # Create dict for electricity price
-    electricity_price_dict = electricity_price("data/estat_nrg_pc_204.csv", column_names)
+    electricity_price_dict = electricity_price("./python-microgrid-simulation/data/estat_nrg_pc_204.csv", column_names)
 
     # Generate the battery, node, renewable and microgrid modules
     batteries = generate_battery_modules(column_names)
