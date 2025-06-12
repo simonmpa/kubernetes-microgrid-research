@@ -1,6 +1,7 @@
 # Kubernetes Microgrid Scheduling Research Simulation
-## Overview
 This repository presents a novel approach to workload scheduling in Kubernetes by simulating **data centers as microgrids** capable of operating both connected to and disconnected from the main power grid. These microgrids utilize **renewable energy production** and **battery storage** to improve computations sustainability.
+We are extending the [*python-microgrid*](https://github.com/ahalev/python-microgrid) to include nodes with a variable power consumption based on scheduled workloads.
+For more information, please refer to the [paper]().
 
 ## Prerequisites
 To replicate the experiments, you will need:
