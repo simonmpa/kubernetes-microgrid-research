@@ -39,6 +39,3 @@ python src/app.py
 ## Evaluation of results
 After you have run the simulation, you can inspect and evaluate the results the results stored in the `python-microgrid-simulation/logs` folder.
 Here the results of the simulation for each microgrid is stored in a separate log file.
-
-
-```bash
