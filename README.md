@@ -11,7 +11,7 @@ To replicate the experiments, you will need:
   ```bash
   pip install -r python-microgrid-simulation/requirements.txt
   ```
-- The [Azure worktrace]() and place it in the `kubernetes-plugin/data` folder.
+- The [Azure worktrace](https://azurepublicdatasettraces.blob.core.windows.net/azurepublicdataset/trace_data/vmtable/vmtable.csv.gz) and placed in the ``kubernetes-plugin/scripts/`` folder.
 - Install [Make](https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81.exe/) and add it to your path (depending on operating system).
 - Install [Docker](https://docs.docker.com/desktop/) and install for your given operating system.
 
@@ -68,7 +68,7 @@ python createazurenodes.py
 
 This will create the exact same nodes as used in our paper.
 
-The [azure worktrace](https://azurepublicdatasettraces.blob.core.windows.net/azurepublicdataset/trace_data/vmtable/vmtable.csv.gz) needs to be downloaded and placed in the ``kubernetes-plugin/scripts/`` folder, then sorted by running:
+Sort the Azure worktrace by running the following command in the `kubernetes-plugin/scripts/` directory:
 
 ```bash
 python datacleaning.py
