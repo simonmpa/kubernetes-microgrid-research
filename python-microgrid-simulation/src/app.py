@@ -466,8 +466,8 @@ def main():
             microgrid.step(custom_action, normalized=False)
 
             log = microgrid.get_log(as_frame=True, drop_forecasts=True)
-            filename = f"logs/{microgrid.grid_name}.csv"
-            os.makedirs("logs", exist_ok=True)
+            filename = f"python-microgrid-simulation/logs/{microgrid.grid_name}.csv"
+            os.makedirs("python-microgrid-simulation/logs", exist_ok=True)
             log.to_csv(filename, mode="w", header=True, index=False)
 
             state_of_charge.append(
