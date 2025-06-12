@@ -36,6 +36,43 @@ python src/app.py
 
 ## Running the Kubernetes Plugin and Workload
 
+### Running the Kubernetes Scheduler Simulator
+
+To run the Kubernetes Scheduler Simulator, go to ``kubernetes-plugin/kubernets-scheduler-simulator/`` and run the following command:
+```bash
+make docker_build_and_up
+```
+This should build the scheduler and run it has part of a kwok cluster in docker.
+
+Then go to ``kubernetes-plugin/kwok-stages-fast/`` and run:
+
+```bash
+kubectl -s :3131 apply -f stage-fast.yaml
+```
+This applies the stages, that are used to decide how long a job runs.
+
+To enable the plugin, go to ``localhost:3000`` and click on the cogwheel icon on the top left.
+
+Add the plugin, which in this case is called ``NodeNumber``, and give it a desired weight. 
+![Tux, the Linux mascot](/images/plugin-weight.png)
+
+### Running the worktrace
+
+To emulate our test-setup, go to ``kubernetes-plugin/scripts/`` and run:
+
+```bash
+python createazurenodes.py
+```
+
+This will create the exact same nodes as used in our paper.
+
+The [azure worktrace](https://azurepublicdatasettraces.blob.core.windows.net/azurepublicdataset/trace_data/vmtable/vmtable.csv.gz) needs to be downloaded and placed in the ``kubernetes-plugin/scripts/`` folder, then sorted by running:
+
+```bash
+python datacleaning.py
+```
+
+
 
 ## Evaluation of results
 After you have run the simulation, you can inspect and evaluate the results the results stored in the `python-microgrid-simulation/logs` folder.
