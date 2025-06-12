@@ -19,19 +19,19 @@ To replicate the experiments, you will need:
 Before getting started, create the database by running the following command:
 
 ```bash
-python src/database.py
+python python-microgrid-simulation/src/database.py
 ```
 
 To run the simulation, you will need two terminals. Open the first terminal in the *python-microgrid-simulation* directory and run the following command:
 
 ```bash
-flask --app src/api run
+flask --app python-microgrid-simulation/src/api run
 ```
 
 Likewise, open the second terminal in the *python-microgrid-simulation* directory and run the following command:
 
 ```bash
-python src/app.py
+python python-microgrid-simulation/src/app.py
 ```
 
 ## Running the Kubernetes Plugin and Workload
