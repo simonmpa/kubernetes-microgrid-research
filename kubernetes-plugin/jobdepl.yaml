@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: job-
+  namespace: default
+
+spec:
+  template:
+    metadata:
+      annotations:
+        stage-delay: "2025-05-16T13:30:49Z"
+        avg-cpu: 100.0
+    spec:
+      containers:
+        - name: job-container
+          image: registry.k8s.io/pause:3.5
+          resources:
+            limits:
+              cpu: 100m
+              memory: 16Gi
+            requests:
+              cpu: 100m
+              memory: 16Gi
+      restartPolicy: Never
+  ttlSecondsAfterFinished: 5
