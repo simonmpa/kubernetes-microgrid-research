@@ -90,4 +90,4 @@ curl -X DELETE localhost:5000/delete-db
 
 ## Evaluation of results
 After you have run the simulation, you can inspect and evaluate the results the results stored in the `python-microgrid-simulation/logs` folder.
-Here the results of the simulation for each microgrid is stored in a separate log file.
+Here the results of the simulation for each microgrid is stored in a separate log file, and can we evaluated against our results in `python-microgrid-simulation/results`.
