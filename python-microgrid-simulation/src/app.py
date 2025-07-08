@@ -182,9 +182,12 @@ def generate_battery_modules(c_names: list):
     for name in c_names:
         battery = BatteryModule(
             min_capacity=0,
-            max_capacity=23296.7,  # 101.29 Ahr rougly 23296.7 Wh or 23.3 kWh
-            max_charge=2329.67, # can maximum charge 10% of the battery capacity in 1 step
-            max_discharge=2329.67, # can maximum discharge 10% of the battery capacity in 1 step
+            #max_capacity=23296.7,  # 101.29 Ahr rougly 23296.7 Wh or 23.3 kWh
+            max_capacity=41253, # New battery capacity based on 10.2 hours = 0.425, and is 179.36 Ahr at 230V, gives 41253 Wh or 41.3 kWh
+            #max_charge=2329.67, # can maximum charge 10% of the battery capacity in 1 step
+            max_charge = 4125.3,
+            #max_discharge=2329.67, # can maximum discharge 10% of the battery capacity in 1 step
+            max_discharge=4125.3,  # can maximum discharge 10% of the battery capacity in 1 step
             efficiency=0.9,
             init_soc=0.5,
         )
