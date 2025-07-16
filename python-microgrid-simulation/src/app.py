@@ -341,7 +341,7 @@ def main():
     # Generate the battery, node, renewable and microgrid modules
     batteries = generate_battery_modules(column_names)
     nodes = generate_node_modules(column_names, final_step, grid_dict)
-
+    # print("amount of nodes is: ", len(nodes))
     renewables = generate_renewable_modules(column_names, final_step, df_solar)
     grids = generate_grid_modules(column_names, average_co2, final_step, electricity_price_dict)
     microgrids = generate_microgrids(column_names, batteries, nodes, renewables, grids)
@@ -355,14 +355,21 @@ def main():
     # The actual simulation with updating loads, actions and logging
     #
 
+    # update_grid_load(grid_dict=grid_dict, rows=rows)
+    # print(grid_dict["ES10"], grid_dict["PT02"], grid_dict["ES12"])
+
+    # microgrid.reset()
+
     wait_time = (
-        20.0  # 20 seconds to make the simulation 30x times faster than real time.
+        5.0  # 20 seconds to make the simulation 30x times faster than real time.
     )
+    # starttime = time.monotonic()
 
     state_of_charge = []
 
     total_capacity_of_installations = (
-        3600.0 # W
+        #1800.0  # W, such that it cannot fully cover the load of nodes at full capacity
+        3600.0 # W, such that it cannot fully cover the load of nodes at full capacity
     )
 
     while True:
@@ -371,7 +378,10 @@ def main():
         state_of_charge.clear()
         rows = db_load_retrieve()
         print("Selected rows ", rows)
+        #print("Grid dict before update ", grid_dict)
         update_grid_load(grid_dict=grid_dict, rows=rows)
+        # print("------------------------------------------------------------")
+        # print("Grid dict after update ", grid_dict)
 
         for microgrid in microgrids.values():
             print("Microgrid Name: ", microgrid.grid_name)
@@ -380,6 +390,8 @@ def main():
             net_load = 0.0
 
             for i in range(0, 6):
+            #for i in range(0, 2):
+                # print(microgrid.modules.node[i].node_name)
                 microgrid.modules.node[i].update_current_load(
                     grid_dict[microgrid.modules.node[i].node_name]
                 )
@@ -391,6 +403,9 @@ def main():
             )
 
             net_load = load + pv
+            
+            # if net_load > 0:
+            #     net_load = 0.0
 
             battery_command = 0.0
             grid_command = 0.0
@@ -453,10 +468,11 @@ def main():
                 microgrid.modules.pv_source[0].current_renewable
                 * total_capacity_of_installations,
             )
-            print("Battery SOC ", microgrid.modules.battery[0].soc)
+            print("Battery SOC ", microgrid.modules.battery[0].soc) # This is current_soc before action
             print(
-                "Battery level of charge ", microgrid.modules.battery[0].current_charge
+                "Battery level of charge ", microgrid.modules.battery[0].current_charge # Before action
             )
+            print("Current Co2 emission ", microgrid.modules.grid.item().co2_per_kwh[0])
 
             custom_action.update(
                 {
@@ -469,8 +485,8 @@ def main():
             microgrid.step(custom_action, normalized=False)
 
             log = microgrid.get_log(as_frame=True, drop_forecasts=True)
-            filename = f"python-microgrid-simulation/logs/{microgrid.grid_name}.csv"
-            os.makedirs("python-microgrid-simulation/logs", exist_ok=True)
+            filename = f"logs/{microgrid.grid_name}.csv"
+            os.makedirs("logs", exist_ok=True)
             log.to_csv(filename, mode="w", header=True, index=False)
 
             state_of_charge.append(
@@ -483,8 +499,10 @@ def main():
                     * total_capacity_of_installations,
                     "Current_load": total_load,
                     "Gridname": microgrid.grid_name,
+                    "CO2_emission": microgrid.modules.grid.item().co2_per_kwh[0],
                 }
             )
+            # print(shared_state.state_of_charge)
 
         # API STUFF
         url = "http://127.0.0.1:5000/insert"
