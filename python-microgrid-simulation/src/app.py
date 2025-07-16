@@ -52,7 +52,6 @@ def db_load_retrieve():
     Only retrieves CPU loads that are not completed yet.
     """
     current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # ./python-microgrid-simulation/data/gridnames.csv
     connection = sqlite3.connect("./database.db")
     cursor = connection.execute(
         "SELECT Node, SUM(CPU) "
