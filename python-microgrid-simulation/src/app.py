@@ -360,7 +360,7 @@ def main():
     # microgrid.reset()
 
     wait_time = (
-        5.0  # 20 seconds to make the simulation 30x times faster than real time.
+        20.0  # 20 seconds to make the simulation 30x times faster than real time.
     )
     # starttime = time.monotonic()
 
