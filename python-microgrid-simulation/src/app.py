@@ -155,7 +155,7 @@ def generate_grid_modules(c_names: list, co2: dict, final_step: int, electricity
         else:
             lookup_code = country_code
 
-        co2_value = co2.get(lookup_code, 999) # Use 999 if not found
+        co2_value = co2.get(lookup_code, 0.999) # Use 999 if not found
         # print(name, co2_value)
         electricity_value = electricity_price.get(lookup_code, 888) # Use 888 if not found
 
