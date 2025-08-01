@@ -1,0 +1,7 @@
+*.pyc
+database.db
+kubernetes-plugin/scripts/vmtable.csv
+python-microgrid-simulation/data/solarPV.csv
+python-microgrid-simulation/data/solarPV_10min.csv
+python-microgrid-simulation/data/vmtable2.csv
+python-microgrid-simulation/src/.ipynb_checkpoints/
